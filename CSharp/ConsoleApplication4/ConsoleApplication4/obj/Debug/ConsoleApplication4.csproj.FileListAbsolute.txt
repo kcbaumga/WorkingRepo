@@ -1,0 +1,6 @@
+/home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/bin/Debug/ConsoleApplication4.exe
+/home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/bin/Debug/ConsoleApplication4.pdb
+/home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.csproj.AssemblyReference.cache
+/home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.csproj.CoreCompileInputs.cache
+/home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.exe
+/home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.pdb
