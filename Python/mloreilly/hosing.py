@@ -105,3 +105,59 @@ corr_matrix=housing.corr()
 corr_matrix["median_house_value"].sort_values(ascending=False)
 
 
+#will compare 11 col x 11 col by default
+from pandas.plotting import scatter_matrix
+attributes=["median_house_value", "median_income", "total_rooms", "housing_median_age"]
+scatter_matrix(housing[attributes], figsize=(12,8))
+
+housing["rooms_per_household"]=housing["total_rooms"]/housing["households"]
+housing["bedrooms_per_room"]=housing["total_bedrooms"]/housing["total_rooms"]
+housing["population_per_household"]=housing["population"]/housing["households"]
+corr_matrix=housing.corr()
+corr_matrix["median_house_value"].sort_values(ascending=False)
+
+#clean training set
+housing=strat_train_set.drop("median_house_value", axis=1)
+housing_labels=strat_train_set["median_house_value"].copy()
+
+#Cleaning Data
+housing.dropna(subset=["total_bedrooms"])
+housing.drop("total_bedrooms", axis=1)
+median=housing["total_bedrooms"].median()
+housing["total_bedrooms"].fillna(median, inplace=True)
+
+#Replace missing values
+from sklearn.impute import SimpleImputer
+imputer=SimpleImputer(strategy="median")
+housing_num=housing.drop("ocean_proximity", axis=1)
+imputer.fit(housing_num)
+
+#same result w/ these 2
+imputer.statistics_
+housing_num.median().values
+
+x=imputer.transform(housing_num)
+housing_tr=pd.DataFrame(x, columns=housing_num.columns,
+                        index=housing_num.index)
+
+housing_cat=housing[["ocean_proximity"]]
+housing_cat.head(10)
+
+#text to num
+from sklearn.preprocessing import OrdinalEncoder
+ordinal_encoder=OrdinalEncoder()
+housing_cat_encoded=ordinal_encoder.fit_transform(housing_cat)
+housing_cat_encoded[:10]
+
+ordinal_encoder.categories_
+
+#Need to create multi binary columns dummy attributes. From scikit
+
+from sklearn.preprocessing import OneHotEncoder
+cat_encoder=OneHotEncoder()
+housing_cat_1hot=cat_encoder.fit_transform(housing_cat)
+housing_cat_1hot
+#encoded binary of each value in list
+housing_cat_1hot.toarray()
+
+#pg. 68
