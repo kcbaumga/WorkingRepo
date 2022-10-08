@@ -41,8 +41,11 @@ import matplotlib.pyplot as plt
 #housing.hist(bins=50, figsize=(20,15))
 #plt.show()
 
-#Test Set
 import numpy as np
+
+
+#Test Set Random
+
 def split_train_test(data, test_ratio):
     shuffled_indices=np.random.permutation(len(data))
     test_set_size=int(len(data)*test_ratio)
@@ -71,4 +74,34 @@ train_set, test_set= split_train_test_by_id(housing_with_id, .2, "id")
 #from sklearn.model_selection import train_test_split
 
 #train_set, test_set=train_test_split(housing, test_size=.2, random_state=42)
+
+#ensure representative of dataset
+housing["income_cat"]=pd.cut(housing["median_income"],
+                             bins=[0.,1.5,3.0,4.5,6., np.inf],
+                             labels=[1,2,3,4,5])
+
+housing["income_cat"].hist()
+
+from sklearn.model_selection import StratifiedShuffleSplit
+split=StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+for train_index, test_index in split.split(housing, housing["income_cat"]):
+    strat_train_set=housing.loc[train_index]
+    strat_test_set=housing.loc[test_index]
+
+strat_test_set["income_cat"].value_counts() / len(strat_test_set)
+
+for set_ in (strat_train_set, strat_test_set):
+    set_.drop("income_cat", axis=1, inplace=True)
+
+housing=strat_train_set.copy()
+housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4, s=housing["population"]/100,
+             label="population", figsize=(10,7), c="median_house_value", cmap=plt.get_cmap("jet"),
+             colorbar=True,
+             )
+plt.legend()
+
+#standard correlation coefficient
+corr_matrix=housing.corr()
+corr_matrix["median_house_value"].sort_values(ascending=False)
+
 
