@@ -10,7 +10,8 @@ import os
 import tarfile
 import urllib.request
 
-DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ageron/handson-ml2/master/"
+#DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ageron/handson-ml2/master/"
+DOWNLOAD_ROOT = "https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mloreilly/"
 HOUSING_PATH = os.path.join("datasets", "housing")
 HOUSING_URL = DOWNLOAD_ROOT + "datasets/housing/housing.tgz"
 #Download url onto path
@@ -216,3 +217,71 @@ housing_prepared=full_pipeline.fit_transform(housing)
 
 
 #Selecting and training model
+#First training a linear regressor
+from sklearn.linear_model import LinearRegression
+
+lin_reg=LinearRegression()
+lin_reg.fit(housing_prepared, housing_labels)
+#Trying data now
+some_data=housing.iloc[:5]
+some_labels=housing_labels[:5]
+some_data_prepared=full_pipeline.transform(some_data)
+
+#Comparson of two of these
+print("Predictions", lin_reg.predict(some_data_prepared))
+print("Labels:", list(some_labels))
+
+#Checks prediction over known labels
+divisionoftwo=lin_reg.predict(some_data_prepared)/list(some_labels)
+print(divisionoftwo)
+
+#mean squared error
+#Grabbing typical error from RMSE
+from sklearn.metrics import mean_squared_error
+housing_predictions=lin_reg.predict(housing_prepared)
+lin_mse=mean_squared_error(housing_labels, housing_predictions)
+lin_rmse=np.sqrt(lin_mse)
+lin_rmse
+#68000 average error... not the best 
+#underfit on training data
+
+#Try a DescisionTreeRegressor
+from sklearn.tree import DecisionTreeRegressor
+tree_reg=DecisionTreeRegressor()
+tree_reg.fit(housing_prepared, housing_labels)
+print("Prediction", tree_reg.predict(some_data_prepared))
+print("Labels", list(some_labels))
+housing_predictions=tree_reg.predict(housing_prepared)
+tree_mse=mean_squared_error(housing_labels, housing_predictions)
+tree_rmse=np.sqrt(tree_mse)
+tree_rmse
+#0 error, probably overfit
+
+#cross validation evaluation
+from sklearn.model_selection import cross_val_score
+scores=cross_val_score(tree_reg, housing_prepared, housing_labels,
+                       scoring="neg_mean_squared_error", cv=10)
+tree_rmse_scores=np.sqrt(-scores)
+#utility function, scoring opposite of MSE, why it is -scores
+def display_scores(scores):
+    print("Scores:", scores)
+    print("Mean:", scores.mean())
+    print("Standard Deviation:", scores.std())
+display_scores(tree_rmse_scores)
+
+#Estimates performance of model
+#Now compute same score of Linear Regression model prior
+
+lin_scores=cross_val_score(lin_reg, housing_prepared, housing_labels,
+                           scoring="neg_mean_squared_error", cv=10)
+lin_rmse_scores=np.sqrt(-lin_scores)
+display_scores(lin_rmse_scores)
+
+#Trying Random Forest Model now
+from sklearn.ensemble import RandomForestRegressor
+forest_reg=RandomForestRegressor()
+forest_reg.fit(housing_prepared, housing_labels)
+housing_predictions = forest_reg.predict(housing_prepared)
+forest_mse = mean_squared_error(housing_labels, housing_predictions)
+forest_rmse = np.sqrt(forest_mse)
+forest_rmse
