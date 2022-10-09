@@ -81,7 +81,7 @@ housing["income_cat"]=pd.cut(housing["median_income"],
                              bins=[0.,1.5,3.0,4.5,6., np.inf],
                              labels=[1,2,3,4,5])
 
-housing["income_cat"].hist()
+#housing["income_cat"].hist()
 
 from sklearn.model_selection import StratifiedShuffleSplit
 split=StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
@@ -95,11 +95,11 @@ for set_ in (strat_train_set, strat_test_set):
     set_.drop("income_cat", axis=1, inplace=True)
 
 housing=strat_train_set.copy()
-housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4, s=housing["population"]/100,
-             label="population", figsize=(10,7), c="median_house_value", cmap=plt.get_cmap("jet"),
-             colorbar=True,
-             )
-plt.legend()
+#housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4, s=housing["population"]/100,
+ #            label="population", figsize=(10,7), c="median_house_value", cmap=plt.get_cmap("jet"),
+ #            colorbar=True,
+ #            )
+#plt.legend()
 
 #standard correlation coefficient
 corr_matrix=housing.corr()
@@ -109,7 +109,7 @@ corr_matrix["median_house_value"].sort_values(ascending=False)
 #will compare 11 col x 11 col by default
 from pandas.plotting import scatter_matrix
 attributes=["median_house_value", "median_income", "total_rooms", "housing_median_age"]
-scatter_matrix(housing[attributes], figsize=(12,8))
+#scatter_matrix(housing[attributes], figsize=(12,8))
 
 housing["rooms_per_household"]=housing["total_rooms"]/housing["households"]
 housing["bedrooms_per_room"]=housing["total_bedrooms"]/housing["total_rooms"]
@@ -160,8 +160,6 @@ housing_cat_1hot=cat_encoder.fit_transform(housing_cat)
 housing_cat_1hot
 #encoded binary of each value in list
 housing_cat_1hot.toarray()
-
-#pg. 68
 
 #Transformer Class add combined attributes
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -228,12 +226,12 @@ some_labels=housing_labels[:5]
 some_data_prepared=full_pipeline.transform(some_data)
 
 #Comparson of two of these
-print("Predictions", lin_reg.predict(some_data_prepared))
-print("Labels:", list(some_labels))
+#print("Predictions", lin_reg.predict(some_data_prepared))
+#print("Labels:", list(some_labels))
 
 #Checks prediction over known labels
 divisionoftwo=lin_reg.predict(some_data_prepared)/list(some_labels)
-print(divisionoftwo)
+#print(divisionoftwo)
 
 #mean squared error
 #Grabbing typical error from RMSE
@@ -249,8 +247,8 @@ lin_rmse
 from sklearn.tree import DecisionTreeRegressor
 tree_reg=DecisionTreeRegressor()
 tree_reg.fit(housing_prepared, housing_labels)
-print("Prediction", tree_reg.predict(some_data_prepared))
-print("Labels", list(some_labels))
+#print("Prediction", tree_reg.predict(some_data_prepared))
+#print("Labels", list(some_labels))
 housing_predictions=tree_reg.predict(housing_prepared)
 tree_mse=mean_squared_error(housing_labels, housing_predictions)
 tree_rmse=np.sqrt(tree_mse)
@@ -267,7 +265,7 @@ def display_scores(scores):
     print("Scores:", scores)
     print("Mean:", scores.mean())
     print("Standard Deviation:", scores.std())
-display_scores(tree_rmse_scores)
+#display_scores(tree_rmse_scores)
 
 #Estimates performance of model
 #Now compute same score of Linear Regression model prior
@@ -275,13 +273,46 @@ display_scores(tree_rmse_scores)
 lin_scores=cross_val_score(lin_reg, housing_prepared, housing_labels,
                            scoring="neg_mean_squared_error", cv=10)
 lin_rmse_scores=np.sqrt(-lin_scores)
-display_scores(lin_rmse_scores)
+#display_scores(lin_rmse_scores)
 
 #Trying Random Forest Model now
+print("MADE IT HERE")
 from sklearn.ensemble import RandomForestRegressor
-forest_reg=RandomForestRegressor()
+forest_reg = RandomForestRegressor(n_estimators=100, random_state=42)
 forest_reg.fit(housing_prepared, housing_labels)
+
+
 housing_predictions = forest_reg.predict(housing_prepared)
 forest_mse = mean_squared_error(housing_labels, housing_predictions)
 forest_rmse = np.sqrt(forest_mse)
 forest_rmse
+
+
+
+forest_scores = cross_val_score(forest_reg, housing_prepared, housing_labels,
+                                scoring="neg_mean_squared_error", cv=10)
+forest_rmse_scores = np.sqrt(-forest_scores)
+#display_scores(forest_rmse_scores)
+#promising, score on trainstill might be over fitting
+#import joblib
+#joblib.dump(my_model, "my_model.pkl")
+#my_model_loaded=joblib.load("my_moel.pkl")
+
+#Fine Tuning
+#Grid Search to mess with hyper parameters for fine tuning
+from sklearn.model_selection import GridSearchCV
+param_grid=[
+    {'n_estimators': [3,10,30],
+     'max_features':[2,4,6,8]},
+    {'bootstrap':[False], 'n_estimators':[3,10], 'max_features':[2,3,4]},
+    ]
+forest_reg = RandomForestRegressor(random_state=42)
+grid_search=GridSearchCV(forest_reg, param_grid, cv=5,
+                         scoring='neg_mean_squared_error',
+                         return_train_score=True)
+grid_search.fit(housing_prepared, housing_labels)
+
+#Finds best parameters
+grid_search.best_params_
+#direct method for best estimator
+grid_search.best_estimator_
