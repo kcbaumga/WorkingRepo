@@ -161,3 +161,58 @@ housing_cat_1hot
 housing_cat_1hot.toarray()
 
 #pg. 68
+
+#Transformer Class add combined attributes
+from sklearn.base import BaseEstimator, TransformerMixin
+
+#rooms_ix, bedrooms_ix, population_ix, households_ix=3,4,5,6
+#Dynamic method for indexes
+col_names = "total_rooms", "total_bedrooms", "population", "households"
+rooms_ix, bedrooms_ix, population_ix, households_ix = [
+    housing.columns.get_loc(c) for c in col_names]
+class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
+    def __init__(self, add_bedrooms_per_room=True): # no *args or **kargs
+        self.add_bedrooms_per_room = add_bedrooms_per_room
+    def fit(self, X, y=None):
+        return self  # nothing else to do
+    def transform(self, X):
+        rooms_per_household = X[:, rooms_ix] / X[:, households_ix]
+        population_per_household = X[:, population_ix] / X[:, households_ix]
+        if self.add_bedrooms_per_room:
+            bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
+            return np.c_[X, rooms_per_household, population_per_household,
+                         bedrooms_per_room]
+        else:
+            return np.c_[X, rooms_per_household, population_per_household]
+attr_adder=CombinedAttributesAdder(add_bedrooms_per_room=False)
+housing_extra_attribs=attr_adder.transform(housing.values)
+
+#Sklearn Transformation Pipeline
+#Fit scalers to training data only
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+num_pipeline=Pipeline([
+    ('imputer', SimpleImputer(strategy="median")),
+    ('attribs_adder', CombinedAttributesAdder()),
+    ('std_scaler', StandardScaler()),
+    ])
+
+housing_num_tr=num_pipeline.fit_transform(housing_num)
+
+
+#Column transformer handles all columns not handling differently
+from sklearn.compose import ColumnTransformer
+
+num_attribs=list(housing_num)
+cat_attribs=["ocean_proximity"]
+#requires tuple, transformer, columns it will targer
+full_pipeline=ColumnTransformer([
+    ("num", num_pipeline, num_attribs),
+    ("cat", OneHotEncoder(), cat_attribs),
+    ])
+housing_prepared=full_pipeline.fit_transform(housing)
+
+
+#Selecting and training model
