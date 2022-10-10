@@ -1,0 +1,9 @@
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.csproj.AssemblyReference.cache
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.csproj.CoreCompileInputs.cache
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/mlmodelcsharp.exe
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/mlmodelcsharp.pdb
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/FileHelpers.dll
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/FileHelpers.xml
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.csproj.CopyComplete
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.exe
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.pdb
