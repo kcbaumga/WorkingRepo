@@ -34,6 +34,10 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '64bit|x64' ">
+      <OutputPath>bin\x64\64bit\</OutputPath>
+      <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
     <ItemGroup>
         <Reference Include="CsvTextFieldParser, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\CsvTextFieldParser.1.2.2\lib\netstandard2.0\CsvTextFieldParser.dll</HintPath>
@@ -68,9 +72,6 @@
         <Reference Include="Microsoft.ML.StandardTrainers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.ML.2.0.0-preview.22313.1\lib\netstandard2.0\Microsoft.ML.StandardTrainers.dll</HintPath>
         </Reference>
-        <Reference Include="Microsoft.ML.TensorFlow, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-          <HintPath>..\packages\Microsoft.ML.TensorFlow.2.0.0-preview.22313.1\lib\netstandard2.0\Microsoft.ML.TensorFlow.dll</HintPath>
-        </Reference>
         <Reference Include="Microsoft.ML.Transforms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.ML.2.0.0-preview.22313.1\lib\netstandard2.0\Microsoft.ML.Transforms.dll</HintPath>
         </Reference>
@@ -89,6 +90,9 @@
         </Reference>
         <Reference Include="Protobuf.Text, Version=0.4.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\Protobuf.Text.0.4.0\lib\netstandard2.0\Protobuf.Text.dll</HintPath>
+        </Reference>
+        <Reference Include="Reader, Version=1.0.0.0, Culture=neutral, processorArchitecture=X86">
+          <HintPath>..\packages\Reader.1.0.0\lib\net46\Reader.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">

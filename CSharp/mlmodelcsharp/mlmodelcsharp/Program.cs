@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
+//using System.Collections.Generic;
+//using Google.Protobuf;
+//using Microsoft.ML;
+using Reader;
 
 namespace mlmodelcsharp
 {
@@ -21,36 +26,40 @@ namespace mlmodelcsharp
             stream.Close();
             Console.WriteLine("Completed");
 
-
-
-            // var path = "C//home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/calihousing.csv";
-            using (TextFieldParser csvParser = new TextFieldParser(@"calihousing.csv"))
+            //string CSVFilePathName = @"C:\test.csv";
+            string[] Lines = File.ReadAllLines(filepath);
+            string[] Fields;
+            Fields = Lines[0].Split(new char[] { ',' });
+            int Cols = Fields.GetLength(0);
+            DataTable dt = new DataTable();
+//1st row must be column names; force lower case to ensure matching later on.
+            for (int i = 0; i < Cols; i++)
+                dt.Columns.Add(Fields[i].ToLower(), typeof(string));
+            DataRow Row;
+            for (int i = 1; i < Lines.GetLength(0); i++)
             {
-                csvParser.CommentTokens = new string[] { "#" };
-                csvParser.SetDelimiters(new string[] { "," });
-                csvParser.HasFieldsEnclosedInQuotes = true;
-
-                // Skip the row with the column names
-                csvParser.ReadLine();
-
-                while (!csvParser.EndOfData)
+                Fields = Lines[i].Split(new char[] { ',' });
+                Row = dt.NewRow();
+                for (int f = 0; f < Cols; f++)
+                    Row[f] = Fields[f];
+                dt.Rows.Add(Row);
+            }
+            Console.WriteLine(dt.Rows.Count);
+            foreach(DataRow dataRow in dt.Rows)
+            {
+                foreach(var item in dataRow.ItemArray)
                 {
-                    // Read current line fields, pointer moves to the next line.
-                    string[] fields = csvParser.ReadFields();
-                    string longitude = fields[0];
-                    string latitude = fields[1];
-                    string housingmedianage = fields[2];
-                    string totalrooms = fields[3];
-                    string totalbedrooms = fields[4];
-                    string population = fields[5];
-                    string households = fields[6];
-                    string medianincome = fields[7];
-                    string medianhousevalue = fields[8];
-                    string oceanproximity = fields[9];
-
-                    Console.WriteLine(medianincome);
+                    Console.WriteLine(item);
                 }
             }
         }
     }
 }
+//public static void Example()
+                //{
+            
+            //}
+
+
+            
+    
