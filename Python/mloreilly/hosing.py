@@ -38,7 +38,7 @@ housing=load_housing_data()
 #housing.describe()
 
 #Histograms
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 #housing.hist(bins=50, figsize=(20,15))
 #plt.show()
 
@@ -107,7 +107,7 @@ corr_matrix["median_house_value"].sort_values(ascending=False)
 
 
 #will compare 11 col x 11 col by default
-from pandas.plotting import scatter_matrix
+#from pandas.plotting import scatter_matrix
 attributes=["median_house_value", "median_income", "total_rooms", "housing_median_age"]
 #scatter_matrix(housing[attributes], figsize=(12,8))
 
@@ -350,3 +350,13 @@ cat_encoder=full_pipeline.named_transformers_["cat"]
 cat_one_hot_attribs=list(cat_encoder.categories_[0])
 attributes=num_attribs+extra_attribs+cat_one_hot_attribs
 print(sorted(zip(feature_importances, attributes), reverse=True))
+
+#Evaluate on Test Set
+final_model=grid_search.best_estimator_
+
+x_test=strat_test_set.drop("median_house_value", axis=1)
+y_test=strat_test_set["median_house_value"].copy()
+
+x_test_prepared=full_pipeline.transform(x_test)
+final_predictions=final_model.predict(x_test_prepared)
+
