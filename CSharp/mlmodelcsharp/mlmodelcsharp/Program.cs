@@ -8,11 +8,12 @@ namespace mlmodelcsharp
     {
         public static void Main(string[] args)
         {
-            string url = "https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mloreilly/datasets/housing/housing.csv";
+            string url =
+                "https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mloreilly/datasets/housing/housing.csv";
             System.Net.WebClient client = new System.Net.WebClient();
-            byte[] buffer=client.DownloadData(url);
-           // string filepath = @"C:home\kyle\Gitrepo\WorkingRepo\CSharp\mlmodelcsharp\calihousing.csv";
-           string filepath = @"calihousing.csv";
+            byte[] buffer = client.DownloadData(url);
+            // string filepath = @"C:home\kyle\Gitrepo\WorkingRepo\CSharp\mlmodelcsharp\calihousing.csv";
+            string filepath = @"calihousing.csv";
 
             Stream stream = new FileStream(filepath, FileMode.Create);
             BinaryWriter write = new BinaryWriter(stream);
@@ -22,7 +23,7 @@ namespace mlmodelcsharp
 
 
 
-           // var path = "C//home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/calihousing.csv";
+            // var path = "C//home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/calihousing.csv";
             using (TextFieldParser csvParser = new TextFieldParser(@"calihousing.csv"))
             {
                 csvParser.CommentTokens = new string[] { "#" };
@@ -51,6 +52,5 @@ namespace mlmodelcsharp
                 }
             }
         }
-        
     }
 }
