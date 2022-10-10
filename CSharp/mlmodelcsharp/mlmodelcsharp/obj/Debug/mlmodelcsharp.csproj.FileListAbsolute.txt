@@ -7,3 +7,11 @@
 /home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.csproj.CopyComplete
 /home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.exe
 /home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.pdb
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/CsvTextFieldParser.dll
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/CsvTextFieldParser.xml
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/System.Reflection.TypeExtensions.dll
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/System.Reflection.TypeExtensions.xml
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/mlmodelcsharp.exe.config
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/Microsoft.VisualBasic.dll
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/bin/Debug/Microsoft.VisualBasic.PowerPacks.Vs.dll
+/home/kyle/Gitrepo/WorkingRepo/CSharp/mlmodelcsharp/mlmodelcsharp/obj/Debug/mlmodelcsharp.exe.config
