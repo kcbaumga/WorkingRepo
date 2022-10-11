@@ -9,38 +9,19 @@ import pandas as pd
 import os
 import urllib.request
 import tarfile
+import numpy as np
 DOWNLOAD_ROOT = "https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mlfindev/"
-HOUSING_PATH = os.path.join("datasets", "financial")
-HOUSING_URL = DOWNLOAD_ROOT + "datasets/financial/gdp_csv.tgz"
+#HOUSING_PATH = os.path.join("datasets", "financial")
+HOUSING_URL = DOWNLOAD_ROOT + "datasets/financial/gdp_csv.csv"
 #Download url onto path
-def fetch_fin_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
-    os.makedirs(housing_path, exist_ok=True)
-    tgz_path=os.path.join(housing_path, "gdp_csv.tgz")
-    urllib.request.urlretrieve(housing_url, tgz_path)
-    housing_tgz=tarfile.open(tgz_path)
-    housing_tgz.extractall(path=housing_path)
-    housing_tgz.close()
-fetch_fin_data()
+#def fetch_fin_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
+#    os.makedirs(housing_path, exist_ok=True)
 
-
-#Grab housing csv
-def load_fin_data(housing_path=HOUSING_PATH):
-    csv_path=os.path.join(housing_path, "gdp_csv.csv")
-    return pd.read_csv(csv_path)
-data=load_fin_data()
-#path="https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mlfindev/gdp_csv.csv"
-#data=pd.read_csv(path)
+dt=pd.read_csv(HOUSING_URL)
 #origdata=data
 #print(data)
 
 #iso3, iso2, imfn, country, region, income, year, aio1, aio2,ai03,ai04,ai05,ai06,ai07,ai08
-
-#data.dtypes
-#data.columns
-#df=data.select_dtypes(exclude='float64')
-#print(data.columns,
-#      df.columns)
-#df.dtypes
 
 
 mymap= {
@@ -300,18 +281,41 @@ mymap= {
         'Zambia':255, 
         'Zimbabwe':256
 }
-data.dtypes
+dt.dtypes
 #df=data
 #data.applymap(lambda s: mymap.get(s) if s in mymap else s)
-df=data['Country_Name'].map(lambda s: mymap.get(s) if s in mymap else s)
+df=dt['Country_Name'].map(lambda s: mymap.get(s) if s in mymap else s)
 #df=data
 #df=data['Country_Code'].map(lambda x:x)
 #df=data[]
 n=pd.DataFrame({
     'Country_Name':df
     })
-ne=n.join(data["Year"])
-newdf=ne.join(data["Value"])
+ne=n.join(dt["Year"])
+newdf=ne.join(dt["Value"])
 newdf
 #dfid=newdf.reset_index()
 
+def split_train_test(data, test_ratio):
+    shuffled_indices=np.random.permutation(len(data))
+    test_set_size=int(len(data)*test_ratio)
+    test_indices=shuffled_indices[:test_set_size]
+    train_indices=shuffled_indices[test_set_size:]
+    return data.iloc[train_indices], data.iloc[test_indices]
+train_set, test_set=split_train_test(newdf, .2)
+print(len(train_set), len(test_set))
+
+from zlib import crc32
+#Maintain dataset
+def test_set_check(identifier, test_ratio):
+    return crc32(np.int64(identifier)) & 0xffffffff <test_ratio*2**32
+
+def split_train_test_by_id(data, test_ratio, id_column):
+    ids=data[id_column]
+    in_test_set=ids.apply(lambda id_: test_set_check(id_, test_ratio))
+    return data.loc[~in_test_set], data.loc[in_test_set]
+
+fin_with_id=newdf.reset_index()
+fin_with_id["id"]=newdf["Country_Name"]*10000+newdf["Year"]
+train_set, test_set= split_train_test_by_id(fin_with_id, .2, "id")
+print(fin_with_id)
