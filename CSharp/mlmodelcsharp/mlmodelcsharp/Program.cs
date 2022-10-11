@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using Microsoft.ML;
 using Microsoft.VisualBasic.FileIO;
 //using System.Collections.Generic;
 //using Google.Protobuf;
@@ -43,15 +44,23 @@ namespace mlmodelcsharp
                 for (int f = 0; f < Cols; f++)
                     Row[f] = Fields[f];
                 dt.Rows.Add(Row);
+                
             }
+
+            IDataView dv =  new IDataView(dt);
+            //Console.WriteLine(dv.Count);
             Console.WriteLine(dt.Rows.Count);
-            foreach(DataRow dataRow in dt.Rows)
-            {
-                foreach(var item in dataRow.ItemArray)
-                {
-                    Console.WriteLine(item);
-                }
-            }
+           // foreach(DataRow dataRow in dt.Rows)
+            //{
+             //   foreach(var item in dataRow.ItemArray)
+              //  {
+               //     Console.WriteLine(item);
+                //}
+           // }
+            var mlContext = new MLContext();// Creating the ML.Net IHostEnvironment
+
+
+            mlContext.Data.TrainTestSplit(dv);
         }
     }
 }
