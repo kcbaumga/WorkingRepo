@@ -6,9 +6,31 @@ Created on Mon Oct 10 22:13:51 2022
 @author: kyle
 """
 import pandas as pd
-path="/home/kyle/Gitrepo/WorkingRepo/Python/mlfindev/gdp_csv.csv"
-data=pd.read_csv(path)
-origdata=data
+import os
+import urllib.request
+import tarfile
+DOWNLOAD_ROOT = "https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mlfindev/"
+HOUSING_PATH = os.path.join("datasets", "financial")
+HOUSING_URL = DOWNLOAD_ROOT + "datasets/financial/gdp_csv.tgz"
+#Download url onto path
+def fetch_fin_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
+    os.makedirs(housing_path, exist_ok=True)
+    tgz_path=os.path.join(housing_path, "gdp_csv.tgz")
+    urllib.request.urlretrieve(housing_url, tgz_path)
+    housing_tgz=tarfile.open(tgz_path)
+    housing_tgz.extractall(path=housing_path)
+    housing_tgz.close()
+fetch_fin_data()
+
+
+#Grab housing csv
+def load_fin_data(housing_path=HOUSING_PATH):
+    csv_path=os.path.join(housing_path, "gdp_csv.csv")
+    return pd.read_csv(csv_path)
+data=load_fin_data()
+#path="https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mlfindev/gdp_csv.csv"
+#data=pd.read_csv(path)
+#origdata=data
 #print(data)
 
 #iso3, iso2, imfn, country, region, income, year, aio1, aio2,ai03,ai04,ai05,ai06,ai07,ai08
@@ -279,6 +301,17 @@ mymap= {
         'Zimbabwe':256
 }
 data.dtypes
-df=data
+#df=data
+#data.applymap(lambda s: mymap.get(s) if s in mymap else s)
 df=data['Country_Name'].map(lambda s: mymap.get(s) if s in mymap else s)
-df
+#df=data
+#df=data['Country_Code'].map(lambda x:x)
+#df=data[]
+n=pd.DataFrame({
+    'Country_Name':df
+    })
+ne=n.join(data["Year"])
+newdf=ne.join(data["Value"])
+newdf
+#dfid=newdf.reset_index()
+
