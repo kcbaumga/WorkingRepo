@@ -4,3 +4,5 @@
 /home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.csproj.CoreCompileInputs.cache
 /home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.exe
 /home/kyle/Gitrepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.pdb
+/home/kyle/git/WorkingRepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.exe
+/home/kyle/git/WorkingRepo/CSharp/ConsoleApplication4/ConsoleApplication4/obj/Debug/ConsoleApplication4.pdb
