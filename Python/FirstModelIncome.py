@@ -25,7 +25,7 @@ def prepare_country_stats(oecd_bli, gdp_per_capita):
     keep_indices = list(set(range(36)) - set(remove_indices))
     return full_country_stats[["GDP per capita", 'Life satisfaction']].iloc[keep_indices]
 
-datapath = os.path.join("datasets", "lifesat", "")
+datapath = os.path.join("Python","datasets", "lifesat", "")
 #%matplotlib inline
 import matplotlib as mpl
 mpl.rc('axes', labelsize=14)
