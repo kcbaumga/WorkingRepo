@@ -1,5 +1,8 @@
+Drop Table cardecision;
+
 CREATE TABLE cardecision (
     id INT,
+    carid INT,
     buying varchar(255),
     maint varchar(255),
     doors varchar(255),
