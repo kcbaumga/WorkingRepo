@@ -1,11 +1,11 @@
 from sqlalchemy.schema import Column
 from sqlalchemy.types import String, Integer, Enum
-from .Database import Base
+from Database import Base
 import enum
 
 
 class CarInfo(Base):
-    __tablename__ = "car"
+    __tablename__ = "cardecision"
 
     id = Column(Integer, primary_key=True, index=True)
     carid=Column(Integer)
@@ -14,5 +14,5 @@ class CarInfo(Base):
     doors = Column(String)
     persons = Column(String)
     lug_boot = Column(String)
-    safety = Column(String)
+    carsafety = Column(String)
     decision = Column(String)

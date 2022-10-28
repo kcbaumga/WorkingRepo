@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from .DataModel import FuelType
 from typing import Optional, List
 
 

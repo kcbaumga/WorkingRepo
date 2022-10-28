@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi_utils.cbv import cbv
 from sqlalchemy.orm import Session
-from .crudapp import get_all_cars, create_car, get_car_info_by_id, update_car_info, delete_car_info
-from .Database import get_db
+from crudapp import get_all_cars, create_car, get_car_info_by_id, update_car_info, delete_car_info
+from Database import get_db
 from exceptions import CarInfoException
 from schemas import Car, CreateAndUpdateCar, PaginatedCarInfo
 
