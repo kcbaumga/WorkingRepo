@@ -1,6 +1,6 @@
 from typing import List
 from sqlalchemy.orm import Session
-from exceptions import CarInfoInfoAlreadyExistError, CarInfoNotFoundError
+from .exceptions import CarInfoInfoAlreadyExistError, CarInfoNotFoundError
 from .DataModel import CarInfo
 from schemas import CreateAndUpdateCar
 
