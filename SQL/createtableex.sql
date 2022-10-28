@@ -1,7 +1,12 @@
---Drop TABLE tabletest;
---Syntax createtable
-CREATE TABLE tabletest (
-    column1 varchar(255),
-    column2 INT,
-    column3 DECIMAL(5,2)
+CREATE TABLE cardecision (
+    id INT,
+    buying varchar(255),
+    maint varchar(255),
+    doors varchar(255),
+    persons varchar(255),
+    lug_boot varchar(255),
+    carsafety varchar(255),
+    decision varchar(255)
 ); 
+
+CREATE  UNIQUE INDEX carid ON cardecision(id);
