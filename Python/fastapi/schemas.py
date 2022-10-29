@@ -10,7 +10,7 @@ class CreateAndUpdateCar(BaseModel):
     doors: str
     persons: str
     lug_boot: str
-    safety: str
+    carsafety: str
     decision: str
 
 

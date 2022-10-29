@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
-import api
+import Python.fastapi.api as api
 
 # Initialize the app
 app = FastAPI()

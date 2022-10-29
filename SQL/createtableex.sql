@@ -1,7 +1,7 @@
 Drop Table cardecision;
 
 CREATE TABLE cardecision (
-    id INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     carid INT,
     buying varchar(255),
     maint varchar(255),

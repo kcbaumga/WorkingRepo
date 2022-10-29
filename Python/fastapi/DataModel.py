@@ -8,7 +8,6 @@ class CarInfo(Base):
     __tablename__ = "cardecision"
 
     id = Column(Integer, primary_key=True, index=True)
-    carid=Column(Integer)
     buying = Column(String)
     maint = Column(String)
     doors = Column(String)
@@ -16,3 +15,4 @@ class CarInfo(Base):
     lug_boot = Column(String)
     carsafety = Column(String)
     decision = Column(String)
+    carid=Column(Integer)

@@ -40,13 +40,14 @@ def update_car_info(session: Session, _id: int, info_update: CreateAndUpdateCar)
     if car_info is None:
         raise CarInfoNotFoundError
 
-    car_info.manufacturer = info_update.manufacturer
-    car_info.modelName = info_update.modelName
-    car_info.fuelType = info_update.fuelType
-    car_info.cc = info_update.cc
-    car_info.gearBox = info_update.gearBox
-    car_info.onRoadPrice = info_update.onRoadPrice
-    car_info.seatingCapacity = info_update.seatingCapacity
+    car_info.buying = info_update.buying
+    car_info.maint = info_update.maint
+    car_info.doors = info_update.doors
+    car_info.persons = info_update.persons
+    car_info.lug_boot = info_update.lug_boot
+    car_info.carsafety = info_update.carsafety
+    car_info.decision = info_update.decision
+    car_info.carid = info_update.carid
 
     session.commit()
     session.refresh(car_info)
