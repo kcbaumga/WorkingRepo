@@ -1,0 +1,86 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/kyle/git/WorkingRepo/CSharp/API/mongodbcarsapi/mongodbcarsapi.csproj": {}
+  },
+  "projects": {
+    "/home/kyle/git/WorkingRepo/CSharp/API/mongodbcarsapi/mongodbcarsapi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/kyle/git/WorkingRepo/CSharp/API/mongodbcarsapi/mongodbcarsapi.csproj",
+        "projectName": "mongodbcarsapi",
+        "projectPath": "/home/kyle/git/WorkingRepo/CSharp/API/mongodbcarsapi/mongodbcarsapi.csproj",
+        "packagesPath": "/home/kyle/.nuget/packages/",
+        "outputPath": "/home/kyle/git/WorkingRepo/CSharp/API/mongodbcarsapi/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/kyle/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/kyle/.dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

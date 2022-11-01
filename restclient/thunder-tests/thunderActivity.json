@@ -40,5 +40,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "9cc3ed9d-1176-4d82-8e26-8c7c26da4b67",
+    "colId": "history",
+    "containerId": "",
+    "name": "127.0.0.1:5000/cars",
+    "url": "127.0.0.1:5000/cars",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-10-29T04:05:12.054Z",
+    "modified": "2022-10-29T04:22:11.863Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[{\n\t\"buying\": \"string\",\n\t\"carid\": 8,\n\t\"carsafety\": \"string\",\n\t\"decision\": \"string\",\n\t\"doors\": \"string\",\n\t\"lug_boot\": \"string\",\n\t\"maint\": \"string\",\n\t\"persons\": \"string\"\n},\n{\n\t\"buying\": \"string\",\n\t\"carid\": 8,\n\t\"carsafety\": \"string\",\n\t\"decision\": \"string\",\n\t\"doors\": \"string\",\n\t\"lug_boot\": \"string\",\n\t\"maint\": \"string\",\n\t\"persons\": \"string\"\n}]",
+      "form": []
+    },
+    "tests": []
   }
 ]

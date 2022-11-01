@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "uO3G18WBifdTF+R/apo6fyavmCO9PwYqBsQRjdDvpZA=",
+  "Source": "mariadbconnector",
+  "BasePath": "_content/mariadbconnector",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

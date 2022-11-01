@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
-
+import json
 from flask_marshmallow import Marshmallow
 from sqlalchemy.schema import Column
 from sqlalchemy.types import String, Integer
@@ -61,13 +61,14 @@ def index():
     cars = car_schema.dump(get_products)
     return make_response(jsonify({"car": cars}))
 
-@app.route('/car', methods = ['POST'])
+@app.route('/cars', methods = ['POST'])
 def create_product():
     data = request.get_json()
     car_schema = CarSchema()
+    #product=car_schema.load(json.loads(json.dumps(data)))
     product = car_schema.load(data)
-    cars = car_schema.dump(product.create())
-    return make_response(jsonify({"product": cars}),200)
+    cars = car_schema.dump(product)
+    return make_response(jsonify({"car": cars}),200)
 
 if __name__ == '__main__':
     app.run(debug=True)
