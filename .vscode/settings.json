@@ -12,6 +12,19 @@
             "name": "testerml",
             "database": "testerml",
             "username": "admin"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "192.168.0.232",
+            "port": 3306,
+            "askForPassword": true,
+            "driver": "MariaDB",
+            "name": "tester2",
+            "username": "admin",
+            "database": "testerml"
         }
     ]
 }

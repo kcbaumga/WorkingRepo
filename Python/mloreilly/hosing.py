@@ -10,6 +10,7 @@ import os
 import tarfile
 import urllib.request
 
+
 #DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ageron/handson-ml2/master/"
 DOWNLOAD_ROOT = "https://raw.githubusercontent.com/kcbaumga/WorkingRepo/main/Python/mloreilly/"
 HOUSING_PATH = os.path.join("datasets", "housing")
@@ -360,3 +361,7 @@ y_test=strat_test_set["median_house_value"].copy()
 x_test_prepared=full_pipeline.transform(x_test)
 final_predictions=final_model.predict(x_test_prepared)
 
+my_model=final_predictions
+import joblib
+joblib.dump(my_model, "my_model.pkl")
+my_model_loaded = joblib.load("my_model.pkl")
