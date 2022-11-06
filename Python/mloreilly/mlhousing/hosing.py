@@ -363,5 +363,5 @@ final_predictions=final_model.predict(x_test_prepared)
 
 my_model=final_predictions
 import joblib
-joblib.dump(my_model, "my_model.pkl")
-my_model_loaded = joblib.load("my_model.pkl")
+joblib.dump(my_model, "Python/mloreilly/mlhousing/my_model.pkl")
+my_model_loaded = joblib.load("Python/mloreilly/mlhousing/my_model.pkl")
